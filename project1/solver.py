@@ -27,7 +27,7 @@ Author: Kuo-Chuan Pan, NTHU 2022.10.06
 For the course, computational physics
 
 """
-def solve_ivp(func, t_span, y0, method, t_eval, args):
+def solve_ivp(func, t_span, y0, method, t_eval, *args):
     """
     Solve Initial Value Problems. 
 
@@ -53,6 +53,13 @@ def solve_ivp(func, t_span, y0, method, t_eval, args):
     #
     # TODO:
     #
+    y = y0
+    for n in np.arrange(1, len(t_eval)):
+        dt = t_eval[n]-t_eval[n-1]
+        y = _update(func,y,dt,t_eval[n],method,*arg)
+        sol[:,n] = y
+
+
 
     return sol
 
@@ -93,6 +100,11 @@ def _update_euler(derive_func,y0,dt,t,*args):
     #
     # TODO:
     #
+    k = derive_func(t,y0,*args)
+    ynext = y0 + dt*k
+
+    return ynext
+# derive_func is the function 'f' in demo 1 and 2
 
     return y0 # <- change here. just a placeholder
 
@@ -106,6 +118,13 @@ def _update_rk2(derive_func,y0,dt,t,*args):
     #
     # TODO:
     #
+    k1 = derive_func(t,y0,*args)
+    k2 = derive_func(t+dt, y0+k1*dt, *args)
+    ynext = y0 + 0.5 * (k1 + k2) *dt
+
+    return ynext
+
+
 
     return y0 # <- change here. just a placeholder
 
@@ -134,7 +153,8 @@ if __name__=='__main__':
     """
 
 
-    def oscillator(t,y,K,M):
+    def oscillator(t,y,K,M): 
+        #This is the so-called derive_func in the above codes, which is outside the update function.
         """
         The derivate function for an oscillator
         In this example, we set
