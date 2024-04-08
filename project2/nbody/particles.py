@@ -8,5 +8,6 @@ class Particles:
     """
     def __init__(self, N):
         self.nparticles = N
+        # test conflcit in VS code
         return
 
