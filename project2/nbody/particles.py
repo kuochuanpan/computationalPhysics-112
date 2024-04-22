@@ -7,5 +7,6 @@ class Particles:
     Particle class to store particle properties
     """
     def __init__(self, N):
-        pass
+        self.nparticles = N
+        return
 
