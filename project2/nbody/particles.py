@@ -6,6 +6,7 @@ class Particles:
     """
     Particle class to store particle properties
     """
+
     def __init__(self, N:int = 100):
         """
         :param N: number of particles.
@@ -18,6 +19,7 @@ class Particles:
         self._tags          = np.arange(N)
         self.time = 0
     pass
+
 
     @property
     def tags(self):
