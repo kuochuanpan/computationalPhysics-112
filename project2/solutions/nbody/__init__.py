@@ -1,3 +1,3 @@
-from nbody.particles import Particles
-from nbody.simulator import NBodySimulator
-from nbody.visualization import load_files, save_movie 
+from .particles import Particles
+from .simulator import NBodySimulator
+from .visualization import load_files, save_movie 
